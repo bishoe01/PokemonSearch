@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var searchText: String = ""
-    @State private var result: String = ""
+    @State private var result: Pokemon? = nil
+
     // 검색 결과
 
     func searchAction(_ query: String) async {
@@ -18,19 +19,19 @@ struct ContentView: View {
         }
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
+            let pokemon = try JSONDecoder().decode(SearchResultItem.self, from: data)
 
-            let item = SearchResultItem(
+            let item = Pokemon(
                 id: pokemon.id,
                 name: pokemon.name,
                 types: pokemon.types.map { $0.type.name },
                 frontImage: pokemon.sprites.front_default,
                 backImage: pokemon.sprites.back_default
             )
+            result = item
             print(item)
         } catch {
-            result = "오류: \(error)"
-            print("에러발생")
+            print(error.localizedDescription)
         }
     }
 
@@ -42,6 +43,31 @@ struct ContentView: View {
                     print(q)
                     Task { await searchAction(q) }
                 }
+            if let result {
+                VStack {
+                    Text(result.name)
+                    HStack {
+                        ForEach(result.types, id: \.self) {
+                            type in
+                            Text(type)
+                                .padding(.horizontal, 8)
+                                .background(.blue)
+                                .cornerRadius(8)
+                        }
+                    }
+
+                    AsyncImage(url: URL(string: result.frontImage!)) { image in
+                        image.resizable().aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    AsyncImage(url: URL(string: result.backImage!)) { image in
+                        image.resizable().aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                }
+            }
         }
         .padding()
     }
@@ -55,10 +81,15 @@ typealias Parameter = [String: String]
 
 let baseURL = "https://pokeapi.co/api/v2/pokemon"
 
-struct ApiSpec {
+struct APISpec {
     let url: String
     let method: APIMethod
     let term: Parameter
+}
+
+enum APIError: Error {
+    case invalidResponse
+    case decodingFailed
 }
 
 enum APIMethod: String {
@@ -68,7 +99,7 @@ enum APIMethod: String {
     case delete
 }
 
-struct Pokemon: Decodable {
+struct SearchResultItem: Decodable {
     let id: Int
     let name: String
     let types: [TypeElement]
@@ -88,7 +119,7 @@ struct Sprites: Decodable {
     let back_default: String?
 }
 
-struct SearchResultItem: Identifiable {
+struct Pokemon: Identifiable {
     var id: Int
     var name: String
     var types: [String]
