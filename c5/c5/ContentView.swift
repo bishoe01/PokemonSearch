@@ -17,12 +17,20 @@ struct ContentView: View {
             return
         }
         do {
-            print(url)
             let (data, _) = try await URLSession.shared.data(from: url)
-            result = String(data: data.prefix(200), encoding: .utf8) ?? "텍스트 변환 실패"
-            print(result)
+            let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
+
+            let item = SearchResultItem(
+                id: pokemon.id,
+                name: pokemon.name,
+                types: pokemon.types.map { $0.type.name },
+                frontImage: pokemon.sprites.front_default,
+                backImage: pokemon.sprites.back_default
+            )
+            print(item)
         } catch {
             result = "오류: \(error)"
+            print("에러발생")
         }
     }
 
@@ -31,6 +39,7 @@ struct ContentView: View {
             TextField("이름", text: $searchText)
                 .onSubmit {
                     let q = searchText
+                    print(q)
                     Task { await searchAction(q) }
                 }
         }
@@ -57,4 +66,32 @@ enum APIMethod: String {
     case post
     case put
     case delete
+}
+
+struct Pokemon: Decodable {
+    let id: Int
+    let name: String
+    let types: [TypeElement]
+    let sprites: Sprites
+}
+
+struct TypeElement: Decodable {
+    let type: TypeInfo
+}
+
+struct TypeInfo: Decodable {
+    let name: String
+}
+
+struct Sprites: Decodable {
+    let front_default: String?
+    let back_default: String?
+}
+
+struct SearchResultItem: Identifiable {
+    var id: Int
+    var name: String
+    var types: [String]
+    var frontImage: String?
+    var backImage: String?
 }
