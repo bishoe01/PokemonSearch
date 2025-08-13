@@ -14,8 +14,8 @@ struct ContentView: View {
     // 검색 결과
 
     func searchAction(_ query: String) async {
-        let spec = APISpec(url: "\(baseURL)/\(query)",
-                           method: .get)
+        let spec = APIEndpoint(url: "\(BASEURL)/\(query)",
+                               method: .get)
         guard let url = URL(string: spec.url) else {
             return
         }
@@ -60,16 +60,20 @@ struct ContentView: View {
                                 .cornerRadius(8)
                         }
                     }
-
-                    AsyncImage(url: URL(string: result.frontImage!)) { image in
-                        image.resizable().aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
+                    if let url = result.frontImage {
+                        AsyncImage(url: URL(string: url)) { image in
+                            image.resizable().aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            ProgressView()
+                        }
                     }
-                    AsyncImage(url: URL(string: result.backImage!)) { image in
-                        image.resizable().aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        ProgressView()
+
+                    if let url = result.backImage {
+                        AsyncImage(url: URL(string: url)) { image in
+                            image.resizable().aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            ProgressView()
+                        }
                     }
                 }
             }
@@ -80,51 +84,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-let baseURL = "https://pokeapi.co/api/v2/pokemon"
-
-struct APISpec {
-    let url: String
-    let method: APIMethod
-}
-
-enum APIError: Error {
-    case invalidResponse
-    case decodingFailed
-}
-
-enum APIMethod: String {
-    case get
-    case post
-    case put
-    case delete
-}
-
-struct SearchResultItem: Decodable {
-    let id: Int
-    let name: String
-    let types: [TypeElement]
-    let sprites: Sprites
-}
-
-struct TypeElement: Decodable {
-    let type: TypeInfo
-}
-
-struct TypeInfo: Decodable {
-    let name: String
-}
-
-struct Sprites: Decodable {
-    let front_default: String?
-    let back_default: String?
-}
-
-struct Pokemon: Identifiable {
-    var id: Int
-    var name: String
-    var types: [String]
-    var frontImage: String?
-    var backImage: String?
 }
