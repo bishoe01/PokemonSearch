@@ -14,11 +14,15 @@ struct ContentView: View {
     // 검색 결과
 
     func searchAction(_ query: String) async {
-        guard let url = URL(string: "\(baseURL)/\(query)") else {
+        let spec = APISpec(url: "\(baseURL)/\(query)",
+                           method: .get)
+        guard let url = URL(string: spec.url) else {
             return
         }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var request = URLRequest(url: url)
+            request.httpMethod = spec.method.rawValue.uppercased()
+            let (data, _) = try await URLSession.shared.data(for: request)
             let pokemon = try JSONDecoder().decode(SearchResultItem.self, from: data)
 
             let item = Pokemon(
@@ -46,6 +50,7 @@ struct ContentView: View {
             if let result {
                 VStack {
                     Text(result.name)
+
                     HStack {
                         ForEach(result.types, id: \.self) {
                             type in
@@ -77,14 +82,11 @@ struct ContentView: View {
     ContentView()
 }
 
-typealias Parameter = [String: String]
-
 let baseURL = "https://pokeapi.co/api/v2/pokemon"
 
 struct APISpec {
     let url: String
     let method: APIMethod
-    let term: Parameter
 }
 
 enum APIError: Error {

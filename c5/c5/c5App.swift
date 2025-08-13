@@ -15,3 +15,9 @@ struct c5App: App {
         }
     }
 }
+
+extension Font {
+    static func mainFont(size: CGFloat) -> Font {
+        .custom("NeoDunggeunmoPro-Regular", size: size)
+    }
+}
