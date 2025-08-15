@@ -13,7 +13,7 @@ class SearchViewModel: ObservableObject {
     @Published var result: Pokemon? = nil
 
     func searchAction(_ query: String) async {
-        let spec = APIEndpoint(url: "\(BASEURL)/\(query)",
+        let spec = APIEndpoint(url: "\(BaseUrl)/\(query)",
                                method: .get)
         guard let url = URL(string: spec.url) else {
             return

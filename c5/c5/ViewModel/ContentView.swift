@@ -15,7 +15,6 @@ struct ContentView: View {
             TextField("이름", text: $vm.searchText)
                 .onSubmit {
                     let q = vm.searchText
-                    print(q)
                     Task { await vm.searchAction(q) }
                 }
             if let result = vm.result {

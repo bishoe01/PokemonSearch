@@ -5,8 +5,6 @@
 //  Created by bishoe01 on 8/13/25.
 //
 
-let BASEURL = "https://pokeapi.co/api/v2/pokemon"
-
 enum APIMethod: String {
     case get
     case post
@@ -23,3 +21,5 @@ enum APIError: Error {
     case invalidResponse
     case decodingFailed
 }
+
+let BaseUrl = "https://pokeapi.co/api/v2/pokemon"
