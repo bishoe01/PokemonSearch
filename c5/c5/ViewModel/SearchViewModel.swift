@@ -11,29 +11,16 @@ import SwiftUI
 class SearchViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var result: Pokemon? = nil
+    private let repo: APIPokemonRepository
+
+    // 어디서 요청하는지에 따라 다른 레포지토리를 사용할 수 있게 생성자 주입
+    init(repository: APIPokemonRepository = APIPokemonRepository()) {
+        self.repo = repository
+    }
 
     func searchAction(_ query: String) async {
-        let spec = APIEndpoint(url: "\(BaseUrl)/\(query)",
-                               method: .get)
-        guard let url = URL(string: spec.url) else {
-            return
-        }
         do {
-            var request = URLRequest(url: url)
-            request.httpMethod = spec.method.rawValue.uppercased()
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let pokemon = try JSONDecoder().decode(SearchResultItem.self, from: data)
-
-            let item = Pokemon(
-                id: pokemon.id,
-                name: pokemon.name,
-                types: pokemon.types.map { $0.type.name },
-                frontImage: pokemon.sprites.front_default,
-                backImage: pokemon.sprites.back_default
-            )
-
-            result = item
-            // print(item)
+            result = try await repo.searchPokemon(name: query)
         } catch {
             print(error.localizedDescription)
         }

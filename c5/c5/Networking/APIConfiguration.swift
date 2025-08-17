@@ -19,6 +19,7 @@ struct APIEndpoint {
 
 enum APIError: Error {
     case invalidResponse
+    case invalidURL
     case decodingFailed
 }
 
