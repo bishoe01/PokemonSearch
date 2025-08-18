@@ -11,11 +11,10 @@ import SwiftUI
 class SearchViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var result: Pokemon? = nil
-    private let repo: APIPokemonRepository
+    private let repo: APIPokemonProtocol
 
-    // 어디서 요청하는지에 따라 다른 레포지토리를 사용할 수 있게 생성자 주입
-    init(repository: APIPokemonRepository = APIPokemonRepository()) {
-        self.repo = repository
+    init(repo: APIPokemonProtocol = APIPokemonRepository()) {
+        self.repo = repo
     }
 
     func searchAction(_ query: String) async {
