@@ -13,7 +13,7 @@ protocol APIPokemonProtocol {
 
 struct APIPokemonRepository: APIPokemonProtocol {
     func searchPokemon(name: String) async throws -> Pokemon {
-        let spec = APIEndpoint(url: "\(BaseUrl)/\(name)",
+        let spec = APIEndPoint(url: "\(APIEndPoint.BaseUrl)/\(name)",
                                method: .get)
         guard let url = URL(string: spec.url) else {
             throw APIError.invalidURL

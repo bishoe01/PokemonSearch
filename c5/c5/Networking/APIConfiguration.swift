@@ -12,7 +12,9 @@ enum APIMethod: String {
     case delete
 }
 
-struct APIEndpoint {
+struct APIEndPoint {
+    static let BaseUrl = "https://pokeapi.co/api/v2/pokemon"
+
     let url: String
     let method: APIMethod
 }
@@ -22,5 +24,3 @@ enum APIError: Error {
     case invalidURL
     case decodingFailed
 }
-
-let BaseUrl = "https://pokeapi.co/api/v2/pokemon"
