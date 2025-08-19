@@ -13,7 +13,6 @@ struct SinglePokemonSearchField: View {
     var body: some View {
         TextField("이름", text: $searchText)
             .onSubmit {
-                let q = searchText
                 Task { onSubmit() }
             }
             .font(.mainFont(size: 18))
