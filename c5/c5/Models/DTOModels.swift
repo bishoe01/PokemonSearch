@@ -10,6 +10,7 @@ struct SearchResultItem: Decodable {
     let name: String
     let types: [TypeElement]
     let sprites: Sprites
+    let cries: Cries
 }
 
 struct TypeElement: Decodable {
@@ -23,4 +24,8 @@ struct TypeInfo: Decodable {
 struct Sprites: Decodable {
     let front_default: String
 //    let front_shiny: String
+}
+
+struct Cries: Decodable {
+    let latest: String
 }

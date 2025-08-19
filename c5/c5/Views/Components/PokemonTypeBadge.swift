@@ -12,7 +12,7 @@ struct PokemonTypeBadge: View {
 
     var body: some View {
         Text(type.rawValue)
-            .font(.mainFont(size: 14))
+            .font(.mainFont(size: 24))
             .foregroundColor(.white)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)

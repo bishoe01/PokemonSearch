@@ -10,18 +10,27 @@ import SwiftUI
 struct SinglePokemonView: View {
     let pokemon: Pokemon
     var body: some View {
-        VStack {
-            VStack {
-                Text(pokemon.name)
+        VStack(spacing: 10) {
+            Text("#\(String(format: "%03d", pokemon.id))")
+                .font(.mainFont(size: 24))
+                .foregroundColor(.gray)
+                .tracking(2)
 
-                HStack {
-                    ForEach(pokemon.types, id: \.self) { type in
-                        PokemonTypeBadge(type: type)
-                    }
+            Text(pokemon.name.uppercased())
+                .font(.mainFont(size: 32))
+                .fontWeight(.bold)
+
+            HStack {
+                ForEach(pokemon.types, id: \.self) { type in
+                    PokemonTypeBadge(type: type)
                 }
-                PokemonImage(imageUrl: URL(string: pokemon.frontImage))
             }
+            PokemonImage(imageUrl: URL(string: pokemon.frontImage))
+
         }.padding()
     }
 }
 
+#Preview {
+    ContentView()
+}

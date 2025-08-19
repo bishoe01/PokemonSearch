@@ -12,6 +12,7 @@ struct Pokemon: Identifiable {
     var types: [PokemonType]
     var frontImage: String
 //    var frontShiny: String
+    var cries: String
 }
 
 enum PokemonType: String {
