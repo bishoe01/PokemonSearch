@@ -21,6 +21,6 @@ struct TypeInfo: Decodable {
 }
 
 struct Sprites: Decodable {
-    let front_default: String?
-    let front_shiny: String?
+    let front_default: String
+//    let front_shiny: String
 }

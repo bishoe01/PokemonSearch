@@ -28,7 +28,7 @@ struct APIPokemonRepository: APIPokemonProtocol {
             name: pokemon.name,
             types: pokemon.types.compactMap { PokemonType(rawValue: $0.type.name) },
             frontImage: pokemon.sprites.front_default,
-            backImage: pokemon.sprites.front_shiny
+//            frontShiny: pokemon.sprites.front_shiny
         )
     }
 }
