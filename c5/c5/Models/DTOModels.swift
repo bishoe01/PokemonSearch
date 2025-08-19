@@ -10,7 +10,7 @@ struct SearchResultItem: Decodable {
     let name: String
     let types: [TypeElement]
     let sprites: Sprites
-    let crySound: Cries
+    let cries: Cries
 }
 
 struct TypeElement: Decodable {
