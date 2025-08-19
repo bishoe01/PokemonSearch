@@ -26,7 +26,7 @@ struct APIPokemonRepository: APIPokemonProtocol {
         return Pokemon(
             id: pokemon.id,
             name: pokemon.name,
-            types: pokemon.types.map { $0.type.name },
+            types: pokemon.types.compactMap { PokemonType(rawValue: $0.type.name) },
             frontImage: pokemon.sprites.front_default,
             backImage: pokemon.sprites.front_shiny
         )
