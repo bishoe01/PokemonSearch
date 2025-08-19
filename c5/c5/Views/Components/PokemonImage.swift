@@ -1,5 +1,5 @@
 //
-//  PokemonImageView.swift
+//  PokemonImage.swift
 //  c5
 //
 //  Created by bishoe01 on 8/19/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonImageView: View {
+struct PokemonImage: View {
     var imageUrl: URL?
     var body: some View {
         if let imageUrl {

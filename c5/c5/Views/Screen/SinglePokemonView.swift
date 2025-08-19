@@ -19,7 +19,7 @@ struct SinglePokemonView: View {
                         PokemonTypeBadge(type: type)
                     }
                 }
-                PokemonImageView(imageUrl: URL(string: pokemon.frontImage))
+                PokemonImage(imageUrl: URL(string: pokemon.frontImage))
             }
         }.padding()
     }
