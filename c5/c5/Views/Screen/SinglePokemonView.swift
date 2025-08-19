@@ -20,6 +20,9 @@ struct SinglePokemonView: View {
                 .font(.mainFont(size: 32))
                 .fontWeight(.bold)
 
+            Button("I") {
+                print(pokemon.crySound)
+            }
             HStack {
                 ForEach(pokemon.types, id: \.self) { type in
                     PokemonTypeBadge(type: type)
