@@ -11,44 +11,45 @@ struct ContentView: View {
     @StateObject var vm = SearchViewModel()
 
     var body: some View {
-        VStack {
-            TextField("이름", text: $vm.searchText)
-                .onSubmit {
-                    let q = vm.searchText
-                    Task { await vm.searchAction(q) }
-                }
-            if let result = vm.result {
+        VStack(spacing: 16) {
+            Text("POKEMON SEARCH")
+                .font(.mainFont(size: 32))
+                .padding(.top, 20)
+            SinglePokemonSearchField(searchText: $vm.searchText, onSubmit: {
+                Task { await vm.searchAction(vm.searchText) }
+            })
+            ScrollView {
                 VStack {
-                    Text(result.name)
+                    if let result = vm.result {
+                        VStack {
+                            Text(result.name)
 
-                    HStack {
-                        ForEach(result.types, id: \.self) {
-                            type in
-                            Text(type)
-                                .padding(.horizontal, 8)
-                                .background(.blue)
-                                .cornerRadius(8)
-                        }
-                    }
-                    if let url = result.frontImage {
-                        AsyncImage(url: URL(string: url)) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    }
+                            HStack {
+                                ForEach(result.types, id: \.self) { type in
+                                    PokemonTypeBadge(type: type)
+                                }
+                            }
+                            if let url = result.frontImage {
+                                AsyncImage(url: URL(string: url)) { image in
+                                    image.resizable().aspectRatio(contentMode: .fit)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
 
-                    if let url = result.backImage {
-                        AsyncImage(url: URL(string: url)) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
+                            if let url = result.backImage {
+                                AsyncImage(url: URL(string: url)) { image in
+                                    image.resizable().aspectRatio(contentMode: .fit)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
                         }
                     }
                 }
+                .padding()
             }
         }
-        .padding()
     }
 }
 
