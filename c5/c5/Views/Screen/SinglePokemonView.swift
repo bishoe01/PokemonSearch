@@ -5,10 +5,13 @@
 //  Created by bishoe01 on 8/19/25.
 //
 
+import AVFoundation
 import SwiftUI
 
 struct SinglePokemonView: View {
     let pokemon: Pokemon
+    @StateObject private var pokemonViewModel = PokemonViewModel()
+
     var body: some View {
         VStack(spacing: 10) {
             Text("#\(String(format: "%03d", pokemon.id))")
@@ -20,8 +23,8 @@ struct SinglePokemonView: View {
                 .font(.mainFont(size: 32))
                 .fontWeight(.bold)
 
-            Button("I") {
-                print(pokemon.crySound)
+            Button("울음소리") {
+                pokemonViewModel.playSound(crySound: pokemon.crySound)
             }
             HStack {
                 ForEach(pokemon.types, id: \.self) { type in

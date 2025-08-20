@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7DAFE1A82E54A6B200FB4315 /* OggDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = 7DAFE1A72E54A6B200FB4315 /* OggDecoder */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7D06B17A2E4AED9E003BD10F /* c5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = c5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DAFE1A82E54A6B200FB4315 /* OggDecoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = c5;
 			packageProductDependencies = (
+				7DAFE1A72E54A6B200FB4315 /* OggDecoder */,
 			);
 			productName = c5;
 			productReference = 7D06B17A2E4AED9E003BD10F /* c5.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 7D06B1712E4AED9E003BD10F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7DAFE1A62E54A6B200FB4315 /* XCRemoteSwiftPackageReference "OggDecoder" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7D06B17B2E4AED9E003BD10F /* Products */;
 			projectDirPath = "";
@@ -349,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7DAFE1A62E54A6B200FB4315 /* XCRemoteSwiftPackageReference "OggDecoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/arkasas/OggDecoder";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7DAFE1A72E54A6B200FB4315 /* OggDecoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DAFE1A62E54A6B200FB4315 /* XCRemoteSwiftPackageReference "OggDecoder" */;
+			productName = OggDecoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D06B1722E4AED9E003BD10F /* Project object */;
 }
