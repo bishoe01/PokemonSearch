@@ -18,9 +18,3 @@ struct APIEndPoint {
     let url: String
     let method: APIMethod
 }
-
-enum APIError: Error {
-    case invalidResponse
-    case invalidURL
-    case decodingFailed
-}
