@@ -21,7 +21,7 @@ struct ContentView: View {
                 Task { await vm.searchAction(vm.searchText) }
             })
             if let result = vm.result {
-                SinglePokemonView(pokemon: result)
+                SinglePokemonView(pokemon: result, searchViewModel: vm)
             }
 
             Spacer()

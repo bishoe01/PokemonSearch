@@ -24,4 +24,8 @@ class SearchViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
+
+    func searchNeighbors(number: Int, step: Int) async {
+        await searchAction(String(number + step))
+    }
 }
