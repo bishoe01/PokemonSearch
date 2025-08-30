@@ -1,19 +1,10 @@
 //
-//  DomainModels.swift
+//  PokemonType.swift
 //  c5
 //
-//  Created by bishoe01 on 8/13/25.
+//  Created by bishoe01 on 8/30/25.
 //
 import SwiftUI
-
-struct Pokemon: Identifiable {
-    var id: Int
-    var name: String
-    var types: [PokemonType]
-    var frontImage: String
-//    var frontShiny: String
-    var crySound: String
-}
 
 enum PokemonType: String {
     case normal
