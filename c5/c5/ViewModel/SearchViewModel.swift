@@ -25,7 +25,21 @@ class SearchViewModel: ObservableObject {
         }
     }
 
-    func searchNeighbors(number: Int, step: Int) async {
-        await searchAction(String(number + step))
+    func searchNeighbors(number: Int, step: StepDirection) async {
+        await searchAction(String(number + step.addValue))
+    }
+}
+
+enum StepDirection {
+    case left
+    case right
+
+    var addValue: Int {
+        switch self {
+        case .left:
+            return -1
+        case .right:
+            return +1
+        }
     }
 }

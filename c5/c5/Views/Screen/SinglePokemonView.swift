@@ -33,24 +33,19 @@ struct SinglePokemonView: View {
                 }
             }
             HStack {
-                Button {
-                    Task {
-                        await searchViewModel.searchNeighbors(number: pokemon.id, step: -1)
-                    }
-                } label: {
-                    Image(systemName: "chevron.left").font(.system(size: 50))
+                NeighborButton(direction: .left) {
+                    await searchViewModel.searchNeighbors(number: pokemon.id, step: .left)
                 }
 
                 PokemonImage(imageUrl: URL(string: pokemon.frontImage))
-                Button {
-                    Task {
-                        await searchViewModel.searchNeighbors(number: pokemon.id, step: +1)
-                    }
-                } label: {
-                    Image(systemName: "chevron.right").font(.system(size: 50))
+                NeighborButton(direction: .right) {
+                    await searchViewModel.searchNeighbors(number: pokemon.id, step: .right)
                 }
             }.padding()
 
         }.padding()
     }
 }
+
+
+
