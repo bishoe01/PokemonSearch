@@ -15,12 +15,12 @@ struct SinglePokemonView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text("#\(String(format: "%03d", pokemon.id))")
+            Text(pokemon.formattedId)
                 .font(.mainFont(size: 24))
                 .foregroundColor(.gray)
                 .tracking(2)
 
-            Text(pokemon.name.uppercased())
+            Text(pokemon.formattedName)
                 .font(.mainFont(size: 32))
                 .fontWeight(.bold)
 
@@ -46,6 +46,3 @@ struct SinglePokemonView: View {
         }.padding()
     }
 }
-
-
-

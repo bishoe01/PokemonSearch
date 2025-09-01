@@ -15,4 +15,12 @@ struct Pokemon: Identifiable {
     var crySound: String
 }
 
+extension Pokemon {
+    var formattedName: String {
+        name.capitalized
+    }
 
+    var formattedId: String {
+        "#\(String(format: "%03d", id))"
+    }
+}
