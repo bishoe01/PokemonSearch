@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct c5App: App {
+    @StateObject private var coordinator = Coordinator()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack(path: $coordinator.path) {
+                ContentView()
+            }.navigationDestination(for: Path.self) { path in
+                switch path {
+                case .searchView:
+                    SearchView()
+                }
+            }
         }
     }
 }
