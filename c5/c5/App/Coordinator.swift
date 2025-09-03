@@ -24,5 +24,6 @@ final class Coordinator: ObservableObject {
 }
 
 enum Path: Hashable {
+    
     case searchView
 }

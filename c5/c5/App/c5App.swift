@@ -14,12 +14,13 @@ struct c5App: App {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
                 ContentView()
-            }.navigationDestination(for: Path.self) { path in
-                switch path {
-                case .searchView:
-                    SearchView()
-                }
-            }
+                    .navigationDestination(for: Path.self) { path in
+                        switch path {
+                        case .searchView:
+                            SearchView()
+                        }
+                    }
+            }.environmentObject(coordinator)
         }
     }
 }

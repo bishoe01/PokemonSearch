@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct SearchView: View {
+    @EnvironmentObject private var coordinator: Coordinator
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 20) {
+            Text("Search View")
+                .font(.title)
+                .padding()
+
+            Button("뒤로가기") {
+                coordinator.popLast()
+            }
+        }
     }
 }
 
 #Preview {
     SearchView()
+        .environmentObject(Coordinator())
 }

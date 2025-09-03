@@ -10,9 +10,13 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var vm = SearchViewModel()
+    @EnvironmentObject private var coordinator: Coordinator
 
     var body: some View {
         VStack(spacing: 16) {
+            Button("HI") {
+                coordinator.push(.searchView)
+            }
             Text("POKEMON SEARCH")
                 .font(.mainFont(size: 32))
                 .padding(.top, 20)
@@ -31,4 +35,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(Coordinator())
 }
