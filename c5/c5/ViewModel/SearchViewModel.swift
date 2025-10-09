@@ -9,7 +9,6 @@ import SwiftUI
 
 @MainActor
 class SearchViewModel: ObservableObject {
-    @Published var searchText: String = ""
     @Published var result: Pokemon? = nil
     private let repo: APIPokemonProtocol
 
